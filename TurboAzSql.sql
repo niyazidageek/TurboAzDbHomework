@@ -347,6 +347,11 @@ FULL JOIN AnnouncementStatuses std
 ON da.AnnouncementStatusId = std.Id
 WHERE g.CreationDate >= @StartDate AND g.CreationDate <= @EndDate
 
+CREATE PROCEDURE GetAnnouncementsByDateRange @StartDate nvarchar(30), @EndDate nvarchar(30)
+AS
+SELECT * FROM GET_ALL_ACTIVE_ANNOUNCEMENTS g
+WHERE g.CreationDate >= @StartDate AND g.CreationDate <= @EndDate 
+
 
 CREATE PROCEDURE GetAnnouncementsByMake @Name nvarchar(50)
 AS
@@ -543,6 +548,7 @@ EXEC GetAnnouncementsByCurrency @Name = 'USD'
 EXEC GetAnnouncementsByDrivetrain @Name = 'AWD'
 EXEC GetAnnouncementsBySegment @Name = 'SUV'
 EXEC GetAnnouncementsByEngineVolume @StartVolume = 2500
+EXEC GetAnnouncementsByDateRange @StartDate = '2021/03/23', @EndDate = '2021/08/30'
 EXEC GetAnnouncementsByHorsepower @StartHp = 3, @EndHp = 100
 EXEC GetAnnouncementsByYearRange @StartYear = 2014, @EndYear = 2019
 EXEC GetAnnouncementsByMileage @StartMileage = 799
